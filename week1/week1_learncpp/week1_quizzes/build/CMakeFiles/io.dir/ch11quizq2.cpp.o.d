@@ -1,5 +1,5 @@
-CMakeFiles/io.dir/ch9quiz.cpp.o: \
-  /Users/larsosterberg/summer2025/week1/week1_ch1-chX/ch9quiz.cpp \
+CMakeFiles/io.dir/ch11quizq2.cpp.o: \
+  /Users/larsosterberg/summer2025/week1/week1_learncpp/week1_quizzes/ch11quizq2.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site \
@@ -412,12 +412,4 @@ CMakeFiles/io.dir/ch9quiz.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsblkcnt_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_nl_item.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
-  /Users/larsosterberg/summer2025/week1/week1_ch1-chX/headers/Random.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/random \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/math.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/math.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/numeric \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__split_buffer
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bsd_locale_defaults.h

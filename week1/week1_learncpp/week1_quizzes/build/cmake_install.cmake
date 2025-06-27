@@ -1,4 +1,4 @@
-# Install script for directory: /Users/larsosterberg/summer2025/week1/week1_ch1-chX
+# Install script for directory: /Users/larsosterberg/summer2025/week1/week1_learncpp/week1_quizzes
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,7 +40,7 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/Users/larsosterberg/summer2025/week1/week1_ch1-chX/build/install_local_manifest.txt"
+  file(WRITE "/Users/larsosterberg/summer2025/week1/week1_learncpp/week1_quizzes/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -56,6 +56,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/Users/larsosterberg/summer2025/week1/week1_ch1-chX/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "/Users/larsosterberg/summer2025/week1/week1_learncpp/week1_quizzes/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

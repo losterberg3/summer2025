@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/larsosterberg/summer2025/week1/week1_ch1-chX
+CMAKE_SOURCE_DIR = /Users/larsosterberg/summer2025/week1/week1_learncpp/week1_quizzes
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/larsosterberg/summer2025/week1/week1_ch1-chX/build
+CMAKE_BINARY_DIR = /Users/larsosterberg/summer2025/week1/week1_learncpp/week1_quizzes/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/larsosterberg/summer2025/week1/week1_ch1-chX/build/CMakeFiles /Users/larsosterberg/summer2025/week1/week1_ch1-chX/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/larsosterberg/summer2025/week1/week1_learncpp/week1_quizzes/build/CMakeFiles /Users/larsosterberg/summer2025/week1/week1_learncpp/week1_quizzes/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/larsosterberg/summer2025/week1/week1_ch1-chX/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/larsosterberg/summer2025/week1/week1_learncpp/week1_quizzes/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,29 +129,29 @@ io/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/build
 .PHONY : io/fast
 
-ch9quiz.o: ch9quiz.cpp.o
-.PHONY : ch9quiz.o
+ch11quizq4.o: ch11quizq4.cpp.o
+.PHONY : ch11quizq4.o
 
 # target to build an object file
-ch9quiz.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/ch9quiz.cpp.o
-.PHONY : ch9quiz.cpp.o
+ch11quizq4.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/ch11quizq4.cpp.o
+.PHONY : ch11quizq4.cpp.o
 
-ch9quiz.i: ch9quiz.cpp.i
-.PHONY : ch9quiz.i
+ch11quizq4.i: ch11quizq4.cpp.i
+.PHONY : ch11quizq4.i
 
 # target to preprocess a source file
-ch9quiz.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/ch9quiz.cpp.i
-.PHONY : ch9quiz.cpp.i
+ch11quizq4.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/ch11quizq4.cpp.i
+.PHONY : ch11quizq4.cpp.i
 
-ch9quiz.s: ch9quiz.cpp.s
-.PHONY : ch9quiz.s
+ch11quizq4.s: ch11quizq4.cpp.s
+.PHONY : ch11quizq4.s
 
 # target to generate assembly for a file
-ch9quiz.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/ch9quiz.cpp.s
-.PHONY : ch9quiz.cpp.s
+ch11quizq4.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/ch11quizq4.cpp.s
+.PHONY : ch11quizq4.cpp.s
 
 # Help Target
 help:
@@ -162,9 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... io"
-	@echo "... ch9quiz.o"
-	@echo "... ch9quiz.i"
-	@echo "... ch9quiz.s"
+	@echo "... ch11quizq4.o"
+	@echo "... ch11quizq4.i"
+	@echo "... ch11quizq4.s"
 .PHONY : help
 
 

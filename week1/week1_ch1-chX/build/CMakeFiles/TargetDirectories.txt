@@ -1,3 +1,0 @@
-/Users/larsosterberg/summer2025/week1/week1_ch1-chX/build/CMakeFiles/io.dir
-/Users/larsosterberg/summer2025/week1/week1_ch1-chX/build/CMakeFiles/edit_cache.dir
-/Users/larsosterberg/summer2025/week1/week1_ch1-chX/build/CMakeFiles/rebuild_cache.dir
