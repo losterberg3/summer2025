@@ -1,5 +1,5 @@
-CMakeFiles/PS.dir/PrintStandard.cpp.o: \
-  /Users/larsosterberg/summer2025/week1/week1_intro/PrintStandard.cpp \
+CMakeFiles/io.dir/functions.cpp.o: \
+  /Users/larsosterberg/summer2025/week1/week1_intro/functions.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site \

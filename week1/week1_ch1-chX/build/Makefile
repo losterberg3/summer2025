@@ -117,41 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ps
+# Target rules for targets named io
 
 # Build rule for target.
-ps: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ps
-.PHONY : ps
+io: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 io
+.PHONY : io
 
 # fast build rule for target.
-ps/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ps.dir/build.make CMakeFiles/ps.dir/build
-.PHONY : ps/fast
+io/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/build
+.PHONY : io/fast
 
-PrintStandard.o: PrintStandard.cpp.o
-.PHONY : PrintStandard.o
+week1_ch9quiz.o: week1_ch9quiz.cpp.o
+.PHONY : week1_ch9quiz.o
 
 # target to build an object file
-PrintStandard.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ps.dir/build.make CMakeFiles/ps.dir/PrintStandard.cpp.o
-.PHONY : PrintStandard.cpp.o
+week1_ch9quiz.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/week1_ch9quiz.cpp.o
+.PHONY : week1_ch9quiz.cpp.o
 
-PrintStandard.i: PrintStandard.cpp.i
-.PHONY : PrintStandard.i
+week1_ch9quiz.i: week1_ch9quiz.cpp.i
+.PHONY : week1_ch9quiz.i
 
 # target to preprocess a source file
-PrintStandard.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ps.dir/build.make CMakeFiles/ps.dir/PrintStandard.cpp.i
-.PHONY : PrintStandard.cpp.i
+week1_ch9quiz.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/week1_ch9quiz.cpp.i
+.PHONY : week1_ch9quiz.cpp.i
 
-PrintStandard.s: PrintStandard.cpp.s
-.PHONY : PrintStandard.s
+week1_ch9quiz.s: week1_ch9quiz.cpp.s
+.PHONY : week1_ch9quiz.s
 
 # target to generate assembly for a file
-PrintStandard.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ps.dir/build.make CMakeFiles/ps.dir/PrintStandard.cpp.s
-.PHONY : PrintStandard.cpp.s
+week1_ch9quiz.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/io.dir/build.make CMakeFiles/io.dir/week1_ch9quiz.cpp.s
+.PHONY : week1_ch9quiz.cpp.s
 
 # Help Target
 help:
@@ -161,10 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... ps"
-	@echo "... PrintStandard.o"
-	@echo "... PrintStandard.i"
-	@echo "... PrintStandard.s"
+	@echo "... io"
+	@echo "... week1_ch9quiz.o"
+	@echo "... week1_ch9quiz.i"
+	@echo "... week1_ch9quiz.s"
 .PHONY : help
 
 
