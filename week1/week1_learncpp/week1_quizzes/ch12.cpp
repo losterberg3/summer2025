@@ -1,58 +1,17 @@
 #include <iostream>
+#include <string>
+
+const std::string& getProgramName() // will return a const reference
+{
+    const std::string programName{ "Calculator" };
+
+    return programName;
+}
 
 int main()
 {
-	short value{ 7 }; // &value = 0012FF60
-	short otherValue{ 3 }; // &otherValue = 0012FF54
+    std::string name { getProgramName() }; // makes a copy of a dangling reference
+    std::cout << "This program is named " << name << '\n'; // undefined behavior
 
-	short* ptr{ &value };
-
-	std::cout << &value << '\n';
-	std::cout << value << '\n';
-	std::cout << ptr << '\n';
-	std::cout << *ptr << '\n';
-	std::cout << '\n';
-
-	*ptr = 9;
-
-	std::cout << &value << '\n';
-	std::cout << value << '\n';
-	std::cout << ptr << '\n';
-	std::cout << *ptr << '\n';
-	std::cout << '\n';
-
-	ptr = &otherValue;
-
-	std::cout << &otherValue << '\n';
-	std::cout << otherValue << '\n';
-	std::cout << ptr << '\n';
-	std::cout << *ptr << '\n';
-	std::cout << '\n';
-
-	std::cout << sizeof(ptr) << '\n';
-	std::cout << sizeof(*ptr) << '\n';
-
-	return 0;
+    return 0;
 }
-
-/*
-
-0012FF60
-7
-0012FF60
-7
-
-0012FF60
-9
-0012FF60
-9
-
-0012FF54
-3
-0012FF54
-3
-
-4
-2
-
-*/
