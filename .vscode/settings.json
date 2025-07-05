@@ -65,6 +65,7 @@
         "random": "cpp",
         "utility": "cpp",
         "text_encoding": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "vector": "cpp"
     }
 }

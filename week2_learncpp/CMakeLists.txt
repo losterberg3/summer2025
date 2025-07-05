@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(HelloCPP)
 set(CMAKE_CXX_STANDARD 17)
-add_executable(io ch13quizq3.cpp)
+add_executable(io ch14-5q1.cpp)
 
 #[[
 cmake ..
