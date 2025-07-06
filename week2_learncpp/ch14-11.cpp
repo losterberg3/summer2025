@@ -8,13 +8,9 @@ double m_radius {10.0};
 
 public:
 
-Ball() {print();}
-
-Ball(std::string color) : Ball {color, 10.0} {}
-
 Ball(double radius) : Ball{"black", radius} {}
 
-Ball(std::string color, double radius) : m_color{color}, m_radius{radius} {print();}
+Ball(std::string color="black", double radius=10.0) : m_color{color}, m_radius{radius} {print();}
 
 void print() const
     {
