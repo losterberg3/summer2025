@@ -11,7 +11,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.22189877196144667 -0.4755401877263327 -0.8512475931591268 5.2803178062521745
-  position -0.9631575283958698 -1.1920869672296894 0.8192845011884771
+  position -0.6404848041635941 -0.8071337066314233 0.5383178333432201
 }
 TexturedBackground {
 }
@@ -22,7 +22,7 @@ RectangleArena {
   wallHeight 0.05
 }
 WoodenBox {
-  translation -0.15418 0.2 0.05
+  translation -0.15 0.2 0.05
   rotation 0 0 -1 0.3468
   size 0.1 0.1 0.1
   mass 0.2
@@ -42,5 +42,5 @@ WoodenBox {
   mass 0.2
 }
 E-puck {
-  controller "epuck_go_forward"
+  controller "epuck_go_forward_mine"
 }
