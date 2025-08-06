@@ -60,8 +60,8 @@ int main(int argc, char **argv) {
   WbDeviceTag left_motor = wb_robot_get_device("left wheel motor");  
   wb_motor_set_position(right_motor, INFINITY);
   wb_motor_set_position(left_motor, INFINITY);
-  wb_motor_set_velocity(right_motor, 1.0);
-  wb_motor_set_velocity(left_motor, 1.0);
+  wb_motor_set_velocity(right_motor, 3.0);
+  wb_motor_set_velocity(left_motor, 3.1);
   
   WbDeviceTag left_encoder = wb_robot_get_device("left wheel sensor");
   WbDeviceTag right_encoder = wb_robot_get_device("right wheel sensor");
@@ -97,13 +97,15 @@ int main(int argc, char **argv) {
       double xr = points[i].x;
       double yr = points[i].y;
       
+      i+=4;
+      
       double Xw = x_r + xr*cos(theta_r) - yr*sin(theta_r);
       double Yw = y_r + yr*cos(theta_r) + xr*sin(theta_r);
       
-      fprintf(map_file, "%f,%f\n", Xw, Yw);
+      fprintf(map_file, "%f,%f,%f,%f\n", Xw, Yw, x_r, y_r);
     }
       
-    
+    delay(100);
   }  
   wb_robot_cleanup();
 
