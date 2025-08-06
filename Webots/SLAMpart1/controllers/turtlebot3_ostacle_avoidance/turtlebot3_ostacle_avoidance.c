@@ -17,9 +17,10 @@
 #include <webots/lidar.h>
 #include <webots/motor.h>
 #include <webots/robot.h>
-
+#include <webots/position_sensor.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define TIME_STEP 64
 #define BASE_SPEED 1.5
@@ -37,76 +38,73 @@ void delay(int ms) {
 }
 
 
-// gaussian function
-double gaussian(double x, double mu, double sigma) {
-  return (1.0 / (sigma * sqrt(2.0 * M_PI))) * exp(-((x - mu) * (x - mu)) / (2 * sigma * sigma));
-}
-
 int main(int argc, char **argv) {
   wb_robot_init();
+  FILE *map_file = fopen("map_points.csv", "w");
+  
+  double x_r = 0.0;
+  double y_r = 0.0;
+  double theta_r = 0.0;
+  double prev_left = 0.0;
+  double prev_right = 0.0;
+  double wheel_radius = 0.033;
+  double axle = 0.160;
 
   // get and enable the lidar
   WbDeviceTag lidar = wb_robot_get_device("LDS-01");
   wb_lidar_enable(lidar, TIME_STEP);
   wb_lidar_enable_point_cloud(lidar);
 
-  // get lidar motor and enable rotation (only for visualization, no effect on the sensor)
-  WbDeviceTag lidar_main_motor = wb_robot_get_device("LDS-01_main_motor");
-  WbDeviceTag lidar_secondary_motor = wb_robot_get_device("LDS-01_secondary_motor");
-  wb_motor_set_position(lidar_main_motor, INFINITY);
-  wb_motor_set_position(lidar_secondary_motor, INFINITY);
-  wb_motor_set_velocity(lidar_main_motor, 30.0);
-  wb_motor_set_velocity(lidar_secondary_motor, 60.0);
-
   // get the motors and enable velocity control
   WbDeviceTag right_motor = wb_robot_get_device("right wheel motor");
-  WbDeviceTag left_motor = wb_robot_get_device("left wheel motor");
+  WbDeviceTag left_motor = wb_robot_get_device("left wheel motor");  
   wb_motor_set_position(right_motor, INFINITY);
   wb_motor_set_position(left_motor, INFINITY);
-  wb_motor_set_velocity(right_motor, 0.0);
-  wb_motor_set_velocity(left_motor, 0.0);
-
-  const int lidar_width = wb_lidar_get_horizontal_resolution(lidar);
-  const double lidar_max_range = wb_lidar_get_max_range(lidar);
-
-  // init braitenberg coefficient
-  double *braitenberg_coefficients = (double *)malloc(sizeof(double) * lidar_width);
-  int i;
-  for (i = 0; i < lidar_width; i++)
-    braitenberg_coefficients[i] = 6 * gaussian(i, lidar_width / 4, lidar_width / 12);
-  
-  delay(1000);
   wb_motor_set_velocity(right_motor, 1.0);
-  wb_motor_set_velocity(left_motor, -1.0);
-  delay(4000);
+  wb_motor_set_velocity(left_motor, 1.0);
   
-
+  WbDeviceTag left_encoder = wb_robot_get_device("left wheel sensor");
+  WbDeviceTag right_encoder = wb_robot_get_device("right wheel sensor");
+  wb_position_sensor_enable(left_encoder, TIME_STEP);
+  wb_position_sensor_enable(right_encoder, TIME_STEP);
+  
+  wb_robot_step(TIME_STEP);
+  
+  prev_left = wb_position_sensor_get_value(left_encoder);
+  prev_right = wb_position_sensor_get_value(right_encoder);
+ 
   while (wb_robot_step(TIME_STEP) != -1) {
-    double left_speed = BASE_SPEED, right_speed = BASE_SPEED;
+    const WbLidarPoint *points = wb_lidar_get_point_cloud(lidar);
+    
+    double left = wb_position_sensor_get_value(left_encoder);
+    double right = wb_position_sensor_get_value(right_encoder);
+    
+    double dl = (left - prev_left) * wheel_radius;
+    double dr = (right - prev_right) * wheel_radius;
 
-    // get lidar values
-    const float *lidar_values = wb_lidar_get_range_image(lidar);
-
-    // apply the braitenberg coefficients on the resulted values of the lidar
-    for (i = 0.25 * lidar_width; i < 0.5 * lidar_width; i++) {
-      const int j = lidar_width - i - 1;
-      const int k = i - 0.25 * lidar_width;
-      if (lidar_values[i] != INFINITY && !isnan(lidar_values[i]) && lidar_values[j] != INFINITY && !isnan(lidar_values[j])) {
-        left_speed +=
-          braitenberg_coefficients[k] * ((1.0 - lidar_values[i] / lidar_max_range) - (1.0 - lidar_values[j] / lidar_max_range));
-        right_speed +=
-          braitenberg_coefficients[k] * ((1.0 - lidar_values[j] / lidar_max_range) - (1.0 - lidar_values[i] / lidar_max_range));
-      }
+    prev_left = left;
+    prev_right = right;
+    
+    double dcenter = (dl + dr) / 2;
+    double dtheta = (dr - dl) / axle; //tangent small angle assumption
+    
+    theta_r = theta_r + dtheta;
+    x_r += dcenter * cos(theta_r);
+    y_r += dcenter * sin(theta_r);
+    
+    int n = wb_lidar_get_number_of_points(lidar);
+    for (int i = 0; i < n; i++) {
+      double xr = points[i].x;
+      double yr = points[i].y;
+      
+      double Xw = x_r + xr*cos(theta_r) - yr*sin(theta_r);
+      double Yw = y_r + yr*cos(theta_r) + xr*sin(theta_r);
+      
+      fprintf(map_file, "%f,%f\n", Xw, Yw);
     }
+      
     
-    
-
-    // apply computed velocities
-    wb_motor_set_velocity(left_motor, left_speed);
-    wb_motor_set_velocity(right_motor, right_speed);
-  };
-
-  free(braitenberg_coefficients);
+  }  
   wb_robot_cleanup();
 
   return 0;
