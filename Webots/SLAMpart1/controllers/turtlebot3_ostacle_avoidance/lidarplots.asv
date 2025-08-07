@@ -62,10 +62,10 @@ for idx = 2:sz
     [transform,stats] = matchScans(currentScan,referenceScan, ...
         MaxIterations=500,InitialPose=deltaOdom);
 
-    fusedDelta = 0.2*transform + 0.8*deltaOdom;
+    fusedDelta = scanTform;
     
     % Maintain the list of robot poses. 
-    absolutePose = composeTransform(poseList(idx-1,:),fusedDelta);
+    absolutePose = composeTransform(poseList(idx-1,:),transform);
     poseList(idx,:) = absolutePose;
        
     % Integrate the current laser scan into the probabilistic occupancy

@@ -24,6 +24,7 @@
 
 #define TIME_STEP 64
 #define BASE_SPEED 1.5
+#define IS_INVALID(v) (isnan(v) || isinf(v))
 
 
 //delay function
@@ -44,6 +45,8 @@ int main(int argc, char **argv) {
   
   double x_r = 0.0;
   double y_r = 0.0;
+  double xr = 0.0;
+  double yr = 0.0;
   double theta_r = 0.0;
   double prev_left = 0.0;
   double prev_right = 0.0;
@@ -54,6 +57,7 @@ int main(int argc, char **argv) {
   WbDeviceTag lidar = wb_robot_get_device("LDS-01");
   wb_lidar_enable(lidar, TIME_STEP);
   wb_lidar_enable_point_cloud(lidar);
+  //double max_range = wb_lidar_get_max_range(lidar);
 
   // get the motors and enable velocity control
   WbDeviceTag right_motor = wb_robot_get_device("right wheel motor");
@@ -61,7 +65,7 @@ int main(int argc, char **argv) {
   wb_motor_set_position(right_motor, INFINITY);
   wb_motor_set_position(left_motor, INFINITY);
   wb_motor_set_velocity(right_motor, 3.0);
-  wb_motor_set_velocity(left_motor, 3.1);
+  wb_motor_set_velocity(left_motor, 3.0);
   
   WbDeviceTag left_encoder = wb_robot_get_device("left wheel sensor");
   WbDeviceTag right_encoder = wb_robot_get_device("right wheel sensor");
@@ -94,15 +98,21 @@ int main(int argc, char **argv) {
     
     int n = wb_lidar_get_number_of_points(lidar);
     for (int i = 0; i < n; i++) {
+      double prevx = xr;
+      double prevy = yr;
       double xr = points[i].x;
       double yr = points[i].y;
+      double angle = (2.0 * M_PI) * i / n;  // i-th beam angle
       
-      i+=4;
+      if (IS_INVALID(xr) || IS_INVALID(yr)) {
+        xr = prevx;
+        yr = prevy;
+      }
       
       double Xw = x_r + xr*cos(theta_r) - yr*sin(theta_r);
       double Yw = y_r + yr*cos(theta_r) + xr*sin(theta_r);
       
-      fprintf(map_file, "%f,%f,%f,%f\n", Xw, Yw, x_r, y_r);
+      fprintf(map_file, "%f,%f,%f,%f,%f,%f,%f,%f\n", Xw, Yw, xr, yr, angle, x_r, y_r, theta_r);
     }
       
     delay(100);
