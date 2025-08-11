@@ -2,6 +2,12 @@
 #include <array>
 #include "headers/Random.h"
 
+namespace Settings
+{
+    const int bust = 21;
+    const int stop = 17;
+}
+
 struct Card
 {
     enum Rank
@@ -92,13 +98,111 @@ class Deck
 
 };
 
+struct Player
+{
+    int playerScore{};
+    int aceCount{};
+
+    void addToScore(Card card)
+    {
+        playerScore += card.value();
+        if (card.rank == Card::rank_ace)
+            ++aceCount;
+        consumeAces();
+    }
+
+    void consumeAces()
+    {
+        while (playerScore > Settings::bust && aceCount > 0)
+        {
+            playerScore -= 10;
+            --aceCount;
+        }
+    }
+
+};
+
+enum winCondition
+{
+    win,
+    lose,
+    tie
+};
+
+winCondition blackjack()
+{
+    Player dealer;
+    Player player;
+    Deck deck;
+    Card card;
+    
+    deck.shuffle();
+    dealer.addToScore(deck.dealCard());
+    player.addToScore(deck.dealCard());
+
+    std::cout << "The dealer is showing: " << dealer.playerScore << '\n';
+    std::cout << "You have score: " << player.playerScore << '\n';
+
+    while (true)
+    {
+        char c;
+        std::cout << "Press (h) to hit, (s) to stand: ";
+        std::cin >> c;
+        if (c == 'h')
+        {
+            Card card = deck.dealCard();
+            player.addToScore(card);
+            std::cout << "You flipped a " << card << ". You now have " << player.playerScore << ".\n";
+            if (player.playerScore > Settings::bust)
+            {
+                std::cout << "You went bust.\n";
+                return winCondition::lose;
+            }
+            continue;
+        }
+        else if (c == 's')
+        {
+            break;
+        }
+        else
+        {
+            std::cout << "Invalid input, try again.\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    }
+
+    while (dealer.playerScore < Settings::stop)
+    {
+        Card card = deck.dealCard();
+        dealer.addToScore(card);
+        std::cout << "The dealer flips a " << card << ". They now have " << dealer.playerScore << ".\n";
+        if (dealer.playerScore > Settings::bust)
+        {
+            std::cout << "The dealer went bust.\n";
+            return winCondition::win;
+        }
+    }
+
+    if (player.playerScore == dealer.playerScore)
+        return winCondition::tie;
+
+    return (player.playerScore > dealer.playerScore ? winCondition::win : winCondition::lose);
+}
+
 int main()
 {
-    Deck deck{};
-    std::cout << deck.dealCard() << ' ' << deck.dealCard() << ' ' << deck.dealCard() << '\n';
-
-    deck.shuffle();
-    std::cout << deck.dealCard() << ' ' << deck.dealCard() << ' ' << deck.dealCard() << '\n';
-
+    switch(blackjack())
+    {
+        case winCondition::win:
+            std::cout << "You win!\n";
+            return 0;
+        case winCondition::lose:
+            std::cout << "You lose!\n";
+            return 0;
+        case winCondition::tie:
+            std::cout << "You tied!\n";
+            return 0;
+    }
     return 0;
 }
