@@ -37,9 +37,15 @@ class FixedPoint2
         }
     }
 
+    friend FixedPoint2 operator+ (const FixedPoint2& fp1, const FixedPoint2& fp2);
+
     operator double() const;
 
+    friend std::istream& operator>> (std::istream& in, FixedPoint2& fp);
+
     friend std::ostream& operator<< (std::ostream& out, const FixedPoint2& fp);
+
+    friend bool operator== (const FixedPoint2& fp1, const FixedPoint2& fp2);
 
     friend bool testDecimal(const FixedPoint2 &fp);
 };
@@ -58,30 +64,49 @@ std::ostream& operator<< (std::ostream& out, const FixedPoint2& fp)
     return out;
 }
 
+std::istream& operator>> (std::istream& in, FixedPoint2& fp)
+{
+    double input;
+    in >> input;
+
+    fp = FixedPoint2 {input};
+
+    return in;
+}
+
+FixedPoint2 operator+ (const FixedPoint2& fp1, const FixedPoint2& fp2)
+{
+    return FixedPoint2{ static_cast<double>(fp1) + static_cast<double>(fp2) };
+}
+
+bool operator== (const FixedPoint2& fp1, const FixedPoint2& fp2)
+{
+    return (fp1.m_fractional == fp2.m_fractional && fp1.m_negative == fp2.m_negative && fp1.m_nonfractional == fp2.m_nonfractional);
+}
+
 int main()
 {
-	FixedPoint2 a{ 0.01 };
-	assert(static_cast<double>(a) == 0.01);
+	assert(FixedPoint2{ 0.75 } == FixedPoint2{ 0.75 });    // Test equality true
+	assert(!(FixedPoint2{ 0.75 } == FixedPoint2{ 0.76 })); // Test equality false
 
-	FixedPoint2 b{ -0.01 };
-	assert(static_cast<double>(b) == -0.01);
+	// Test additional cases -- h/t to reader Sharjeel Safdar for these test cases
+	assert(FixedPoint2{ 0.75 } + FixedPoint2{ 1.23 } == FixedPoint2{ 1.98 });    // both positive, no decimal overflow
+	assert(FixedPoint2{ 0.75 } + FixedPoint2{ 1.50 } == FixedPoint2{ 2.25 });    // both positive, with decimal overflow
+	assert(FixedPoint2{ -0.75 } + FixedPoint2{ -1.23 } == FixedPoint2{ -1.98 }); // both negative, no decimal overflow
+	assert(FixedPoint2{ -0.75 } + FixedPoint2{ -1.50 } == FixedPoint2{ -2.25 }); // both negative, with decimal overflow
+	assert(FixedPoint2{ 0.75 } + FixedPoint2{ -1.23 } == FixedPoint2{ -0.48 });  // second negative, no decimal overflow
+	assert(FixedPoint2{ 0.75 } + FixedPoint2{ -1.50 } == FixedPoint2{ -0.75 });  // second negative, possible decimal overflow
+	assert(FixedPoint2{ -0.75 } + FixedPoint2{ 1.23 } == FixedPoint2{ 0.48 });   // first negative, no decimal overflow
+	assert(FixedPoint2{ -0.75 } + FixedPoint2{ 1.50 } == FixedPoint2{ 0.75 });   // first negative, possible decimal overflow
 
-	FixedPoint2 c{ 1.9 }; // make sure we handle single digit decimal
-	assert(static_cast<double>(c) == 1.9);
+	FixedPoint2 a{ -0.48 };
+	assert(static_cast<double>(a) == -0.48);
+	assert(static_cast<double>(-a) == 0.48);
 
-	FixedPoint2 d{ 5.01 }; // stored as 5.0099999... so we'll need to round this
-	assert(static_cast<double>(d) == 5.01);
-
-	FixedPoint2 e{ -5.01 }; // stored as -5.0099999... so we'll need to round this
-	assert(static_cast<double>(e) == -5.01);
-
-	// Handle case where the argument's decimal rounds to 100 (need to increase base by 1)
-	FixedPoint2 f { 106.9978 }; // should be stored with base 107 and decimal 0
-	assert(static_cast<double>(f) == 107.0);
-
-	// Handle case where the argument's decimal rounds to -100 (need to decrease base by 1)
-	FixedPoint2 g { -106.9978 }; // should be stored with base -107 and decimal 0
-	assert(static_cast<double>(g) == -107.0);
+	std::cout << "Enter a number: "; // enter 5.678
+	std::cin >> a;
+	std::cout << "You entered: " << a << '\n';
+	assert(static_cast<double>(a) == 5.68);
 
 	return 0;
 }
