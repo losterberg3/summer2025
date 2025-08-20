@@ -26,7 +26,7 @@ def fetch_from_arxiv(query, max_results=5):
             "pdf_url": entry.link.replace("abs", "pdf")
         }
         papers.append(paper)
-    return papers
+    return papers//
 
 
 def init_db(db_file):
