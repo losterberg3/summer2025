@@ -55,5 +55,6 @@ if __name__ == "__main__":
     embedvectors(DB_FILE, MODEL)
     QUERY = []
     searchpapers(QUERY, MODEL, DB_FILE)
+    
 
 
