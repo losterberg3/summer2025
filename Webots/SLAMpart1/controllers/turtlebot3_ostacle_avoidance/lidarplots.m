@@ -47,6 +47,9 @@ loopClosureScoreThresh = 0.95;
 keyScans = {};
 keyScanPoses = [];
 
+filename = 'occupancy_map.gif'; % Output GIF
+keyIntervalGIF = 1;
+
 % Loop through all the scans and calculate the relative poses between them
 for idx = 2:sz
     % Process the data in pairs.
@@ -97,6 +100,18 @@ for idx = 2:sz
 
     show(map);
     drawnow;
+
+    if mod(idx, keyIntervalGIF) == 0
+        frame = getframe(gcf);              
+        im = frame2im(frame);               
+        [A,mapRGB] = rgb2ind(im,256);       
+
+        if idx == 2
+            imwrite(A,mapRGB,filename,'gif','LoopCount',Inf,'DelayTime',0.1);
+        else
+            imwrite(A,mapRGB,filename,'gif','WriteMode','append','DelayTime',0.1);
+        end
+    end
 end
 
 
