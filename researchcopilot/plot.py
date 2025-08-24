@@ -11,5 +11,5 @@ y = df.iloc[1300:1700, 1]
 plt.plot(y)
 plt.xlabel("Sample #")
 plt.ylabel("12-bit encoding")
-plt.title("~400 sound samples in 0.008 sec")
+plt.title("~400 sound samples in 0.004 sec")
 plt.show()
