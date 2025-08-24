@@ -29,7 +29,7 @@ These were mostly just for fun and to practice pointers.
 
 # Webots
 
-Wrote a webots simulation to collect lidar data off a robot and feed it to a matlab SLAM algorithm to make an occupancy map. ['/Webots/SLAMpart1'](Webots/SLAMpart1/)
+Wrote a webots simulation to collect lidar data off a robot and feed it to a matlab SLAM algorithm to make an occupancy map. ['/Webots/...'](Webots/SLAMpart1/controllers/turtlebot3_ostacle_avoidance/)
 
  <p align="center">
   <img src=images/img2.png  width="400" />
