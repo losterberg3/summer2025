@@ -2,7 +2,7 @@ This repository shows all the programming I've done so far for the summer of 202
 
 # Learncpp 
 
-Spent each week self-learning cpp through the free website. Documented quizzes and projects throughout to practice.
+I had already used c++ a lot for school and projects, but had never gone over the language in full. I spent each week going through lessons on the free website Learncpp.com. Documented quizzes and projects throughout to practice.
 
 Hightlight: Wrote my very own 15puzzle in [`/week7-8_learncpp/puzzle15.cpp`](week7-8_learncpp/puzzle15.cpp/)
 
