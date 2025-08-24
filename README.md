@@ -10,6 +10,8 @@ Hightlight: Wrote my very own 15puzzle in [`/week7-8_learncpp/puzzle15.cpp`](wee
   <img src=images/img1.png  width="200" />
 </p>
 
+TBC ...
+
 
 # Leetcode
 
@@ -42,4 +44,4 @@ Wrote a webots simulation to collect lidar data off a robot and feed it to a mat
 Wanted to make a robotics specific language model to keep track of the state of research in this field. ['/researchcopilot'](researchcopilot/)
 
 
-
+TBC ...
