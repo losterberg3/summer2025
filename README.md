@@ -10,6 +10,10 @@ Hightlight: Wrote my very own 15puzzle in [`/week7-8_learncpp/puzzle15.cpp`](wee
   <img src=images/img1.png  width="200" />
 </p>
 
+<p align="center">
+  <img src=images/game1  width="200" />
+</p>
+
 TBC ...
 
 
