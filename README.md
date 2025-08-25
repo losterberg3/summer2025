@@ -6,9 +6,6 @@ I had already used c++ a lot for school and projects, but had never gone over th
 
 Hightlight: Wrote my very own 15puzzle in [`/week7-8_learncpp/puzzle15.cpp`](week7-8_learncpp/puzzle15.cpp/)
 
-  <p align="center">
-  <img src=images/img1.png  width="200" />
-</p>
 
 <p align="center">
   <img src=images/game1.gif  width="200" />
