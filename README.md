@@ -39,6 +39,10 @@ Wrote a webots simulation to collect lidar data off a robot and feed it to a mat
   <img src=images/img3.png  width="400" />
 </p>
 
+<p align="center">
+  <img src=Webots/SLAMpart1/controllers/turtlebot3_ostacle_avoidance/occupancy_map.gif  width="400" />
+</p>
+
 # Python robotics research copilot
 
 Wanted to make a robotics specific language model to keep track of the state of research in this field. ['/researchcopilot'](researchcopilot/)
