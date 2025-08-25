@@ -4,14 +4,11 @@ This repository shows all the programming I've done so far for the summer of 202
 
 I had already used c++ a lot for school and projects, but had never gone over the language in full. I spent each week going through lessons on the free website Learncpp.com. Documented quizzes and projects throughout to practice.
 
-Hightlight: Wrote my very own 15puzzle in [`/week7-8_learncpp/puzzle15.cpp`](week7-8_learncpp/puzzle15.cpp/)
+Hightlight: Wrote my own 15puzzle in [`/week7-8_learncpp/puzzle15.cpp`](week7-8_learncpp/puzzle15.cpp/)
 
-  <p align="center">
-  <img src=images/img1.png  width="200" />
-</p>
 
 <p align="center">
-  <img src=images/game1  width="200" />
+  <img src=images/game1.gif  width="200" />
 </p>
 
 TBC ...
