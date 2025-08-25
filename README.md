@@ -11,7 +11,7 @@ Hightlight: Wrote my very own 15puzzle in [`/week7-8_learncpp/puzzle15.cpp`](wee
 </p>
 
 <p align="center">
-  <img src=images/game1  width="200" />
+  <img src=images/game1.gif  width="200" />
 </p>
 
 TBC ...
