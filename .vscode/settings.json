@@ -68,5 +68,6 @@
         "thread": "cpp",
         "vector": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "cmake.sourceDirectory": "/Users/larsosterberg/summer2025/week2_learncpp"
 }

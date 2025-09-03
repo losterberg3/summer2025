@@ -7,7 +7,7 @@ MODEL = SentenceTransformer("all-MiniLM-L6-v2")
 
 def embedvectors(db_file, model):
     conn = sqlite3.connect(db_file)
-    rows = conn.cursor().execute("SELECT id, title, abstract FROM papers").fetchall()
+    rows = conn.cursor().execute("SELECT id, title, abstract FROM papers WHERE embedding IS NULL").fetchall()
 
     for pid, title, abstract in rows:
         text = f"{title}. {abstract}"
@@ -38,8 +38,9 @@ def searchpapers(query, model, db_file, top_k=5):
     embeddings = np.vstack(embeddings)
 
     query_emb = model.encode([query], convert_to_numpy=True, normalize_embeddings=True)
+    query_emb = query_emb[0]
 
-    scores = np.dot(query_emb, embeddings)[0]
+    scores = np.dot(embeddings, query_emb)
     top_idx = np.argsort(scores)[::-1][:top_k]
 
     results = [(titles[i], paper_ids[i], scores[i]) for i in top_idx]
@@ -48,13 +49,23 @@ def searchpapers(query, model, db_file, top_k=5):
 
 if __name__ == "__main__":
     conn = sqlite3.connect(DB_FILE)
-    conn.cursor().execute("""ALTER TABLE papers ADD COLUMN embedding BLOB""")
+    cursor = conn.cursor()
+    cursor.execute("PRAGMA table_info(papers)")
+    columns = [row[1] for row in cursor.fetchall()]
+    if "embedding" not in columns:
+        cursor.execute("ALTER TABLE papers ADD COLUMN embedding BLOB")
     conn.commit()
     conn.close()
 
     embedvectors(DB_FILE, MODEL)
-    QUERY = []
-    searchpapers(QUERY, MODEL, DB_FILE)
+    while True:
+        query = input("\nEnter a topic or keyword (or 'exit' to quit): ").strip()
+        if query.lower() == "exit":
+            break
+
+        results = searchpapers(query, MODEL, DB_FILE)
+        for title, pid, score in results:
+            print(f"[{pid}] {title} (score: {score:.4f})")
     
 
 

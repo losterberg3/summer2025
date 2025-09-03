@@ -1,6 +1,7 @@
 import sqlite3
 
-def querysearch(query, db_file='papers.db'):
+
+def querysearch(query, db_file="../papers.db"):
     conn = sqlite3.connect(db_file)
     cur = conn.cursor()
 

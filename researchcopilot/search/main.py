@@ -1,9 +1,9 @@
 import re
 import sqlite3
-from searchsqlite import querysearch
+from search.searchsqlite import querysearch
 
 def main():
-    print("Welcome to your Research Copilot!")
+    print("Welcome to the Research Copilot!")
     while True:
         query = input("\nEnter a topic or keyword (or 'exit' to quit): ").strip()
         if query.lower() == "exit":
